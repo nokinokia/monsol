@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Condiment&display=swap">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Condiment', cursive;
+      overflow-x: hidden;
+      background: radial-gradient(circle, #ff7e5f, #feb47b);
+      color: rgb(212, 58, 58);
+    }
+    .section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+      position: relative;
+      border: 2px solid #fff; /* Garis kotak di setiap halaman */
+      box-sizing: border-box;
+    }
+    .main-section {
+      background: radial-gradient(circle, #ff7e5f, #feb47b);
+      position: relative;
+    }
+    .main-section .content {
+      position: relative;
+      z-index: 1;
+      animation: slideIn 3s infinite alternate;
+    }
+    .main-section .content h1 {
+      font-size: 4rem;
+      margin: 20px 0;
+      animation: colorChange 5s infinite alternate;
+      font-family: 'Permanent Marker', cursive;
+      color: #5d17ff;
+    }
+    .main-section .content img {
+      width: 150px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    .main-section .social-icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .main-section .social-icons a {
+      margin: 0 15px;
+      color: rgb(255, 0, 0);
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    .main-section .social-icons a:hover {
+      transform: scale(1.2);
+    }
+    .logo-container {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid white;
+      border-radius: 50%;
+      animation: rotate 5s linear infinite;
+    }
+    .logo-container img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .box {
+      clip-path: polygon(50% 0%, 80% 10%, 100% 40%, 95% 70%, 80% 90%, 50% 100%, 20% 90%, 5% 70%, 0% 40%, 20% 10%);
+      padding: 20px;
+      margin: 20px;
+      background-color: #17bdff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.6s, transform 0.6s;
+    }
+    .box.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .about-section {
+      flex-direction: row; /* Sampingan bukan vertical */
+    }
+    .about-section .box {
+      width: 20%;
+      margin: 10px;
+    }
+    .animated-photo {
+      width: 20%;
+    }
+    .animated-photo img {
+      width: 100%;
+      height: auto;
+    }
+    .gallery-section {
+        background: radial-gradient(circle, #ff7e5f, #feb47b);
+        padding: 20px 20px;
+    }
+    .gallery-row {
+      display: flex;
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 20px 0;
+      position: relative;
+    }
+    .gallery-row .gallery-box {
+      clip-path: polygon(50% 0%, 70% 10%, 90% 40%, 85% 70%, 70% 90%, 50% 100%, 30% 90%, 15% 70%, 10% 40%, 30% 10%);
+      height: 80px; /* Kecilkan ukuran foto */
+      width: auto;
+      margin: 0 2px; /* Kurangi jarak antar foto */
+      background-color: #17bdff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-row .gallery-box img {
+      height: 100%;
+      width: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 4px rgba(0,0,0,0.3);
+    }
+    .footer-section {
+        background: radial-gradient(circle, #ff7e5f, #feb47b);
+        padding: 10px;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    @keyframes slideIn {
+      0% { transform: translateY(-20px); }
+      100% { transform: translateY(20px); }
+    }
+    @keyframes colorChange {
+      0% { color: #ff7e5f; }
+      100% { color: #feb47b; }
+    }
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes move-right-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    @keyframes move-left-right {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    @keyframes jump {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    .gallery-row.row1 .gallery-box {
+      animation: move-right-left 15s linear infinite;
+    }
+    .gallery-row.row2 .gallery-box {
+      animation: move-left-right 15s linear infinite;
+    }
+    .gallery-row.row3 .gallery-box {
+      animation: jump 2s ease-in-out infinite;
+    }
+    @media (max-width: 768px) {
+      .main-section .content h1 {
+        font-size: 2rem;
+      }
+      .main-section .social-icons a {
+        font-size: 1rem;
+      }
+    }
+
+    .third-section {
+        flex-direction: row; /* Menempatkan kotak bersebelahan */
+        justify-content: space-between; /* Menyebar kotak secara merata */
+        align-items: center; /* Menyelaraskan kotak di tengah */
+      }
+    
+      .third-section .box {
+        width: 45%; /* Menentukan lebar kotak agar bersebelahan */
+        margin: 10px; /* Jarak antar kotak */
+        padding: 20px;
+        background-color: #17bdff;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        border-radius: 8px;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.6s, transform 0.6s;
+      }
+    
+      .third-section .box.in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    
+      @media (max-width: 768px) {
+        .third-section {
+          flex-direction: column; /* Mengubah kotak menjadi vertikal pada layar kecil */
+        }
+    
+        .third-section .box {
+          width: 100%; /* Memperluas kotak agar memenuhi lebar layar pada perangkat kecil */
+        }
+      }
+
+      #copy-button {
+        background-color: #0096d1;
+        color: white;
+        border: none;
+        padding: 0px 20px;
+        font-size: 2rem;
+        cursor: pointer;
+        border-radius: 9px;
+        margin-top: 10px;
+        font-family: "UnifrakturCook", cursive;
+        font-weight: 100;
+        font-style: normal;
+      }
+    
+    #copy-button:hover {
+      background-color: #5d17ff;
+        ;
+    }
+    
+    #copy-text{
+        background-color: #127cdf;
+        color: white;
+        border: none;
+        padding: 0px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        border-radius: 9px;
+        margin-top: 10px;
+        font-family: "UnifrakturCook", cursive;
+      font-weight: 100;
+      font-style: normal;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Section -->
+  <section class="section main-section">
+    <div class="logo-container">
+      <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Logo">
+    </div>
+    <div class="content">
+      <h1>Unique Main Text</h1>
+      <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Main Photo">
+      <div class="social-icons">
+        <a href="https://twitter.com" target="_blank"><img src="https://www.freepnglogos.com/uploads/twitter-x-logo-png/twitter-x-logo-png-9.png" width="40px" alt="Twitter"></a>
+        <a href="https://t.me/chemesolana" target="_blank"><img src="https://logodownload.org/wp-content/uploads/2017/11/telegram-logo-8.png" width="60px" alt="Telegram"></a>
+        <a href="https://pump.fun" target="_blank"><img src="https://static.vecteezy.com/system/resources/previews/021/819/342/non_2x/fun-green-pill-free-png.png" width="60px" alt="Fun"></a>
+</div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section about-section">
+    <div class="box">
+      <h2>About Us</h2>
+      <p>Information about your website.</p>
+    </div>
+    <div class="box animated-photo">
+      <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="About Photo">
+    </div>
+  </section>
+
+  <!-- Third Section -->
+  <section class="section third-section">
+    <div class="box">
+      <h2>TOKENOMIC</h2>
+      <p>
+        TOKEN NAME = $JUCE
+        <br>
+        TOTAL SUPPLAY = 1.000.000.0000E
+        <br>
+        LIQUIDTY POLL BURNED = 100 %
+        <br>
+        TAXS = 0%
+    </p>    
+    <p id="copy-text" class="fade-in">CA XXXXXXXXXXXXXXXXXXXX</p>
+    <button id="copy-button">Salin Teks</button>                
+
+</div>
+    <div class="box">
+      <h2>ROADMAP</h2>
+      <p>1. Define Goals and Objectives</p>
+      <p>2. Identify Steps and Phases</p>
+      <p>3. Schedule Tasks and Phases</p>
+      <p>4. Allocate Resources</p>
+      <p>5. Choose Roadmap Format</p>
+</div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section gallery-section">
+    <div class="gallery-row row1">
+      <div class="gallery-box">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+
+
+      </div>
+      <div class="gallery-box">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+
+      </div>
+      <!-- Tambahkan lebih banyak gambar sesuai kebutuhan -->
+    </div>
+    <div class="gallery-row row2">
+      <div class="gallery-box">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+
+      </div>
+      <div class="gallery-box">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+
+      </div>
+      <!-- Tambahkan lebih banyak gambar sesuai kebutuhan -->
+    </div>
+    <div class="gallery-row row3">
+      <div class="gallery-box">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+
+      </div>
+      <div class="gallery-box">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+        <img src="https://cdn.pixabay.com/photo/2020/05/11/22/31/cat-5160456__340.png" alt="Gallery Image 1">
+
+      </div>
+      <!-- Tambahkan lebih banyak gambar sesuai kebutuhan -->
+    </div>
+  </section>
+  <script>
+    // Function to add 'in-view' class to boxes when they enter the viewport
+    function handleScroll() {
+      const boxes = document.querySelectorAll('.box');
+      const triggerBottom = window.innerHeight / 5 * 4;
+      
+      boxes.forEach(box => {
+        const boxTop = box.getBoundingClientRect().top;
+        if(boxTop < triggerBottom) {
+          box.classList.add('in-view');
+        } else {
+          box.classList.remove('in-view');
+        }
+      });
+    }
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check on page load
+  </script>
+<script src="script.js"></script>
+</body>
+</html>
